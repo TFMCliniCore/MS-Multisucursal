@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AsignacionUsuarioSucursal {
+  id          Int      @id @default(autoincrement())
+  usuarioId   Int
+  sucursalId  Int
+  rolId       Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([usuarioId, sucursalId])
+  @@map("asignaciones_usuario_sucursal")
+}
